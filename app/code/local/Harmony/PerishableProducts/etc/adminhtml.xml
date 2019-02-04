@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @package    Harmony\PerishableProducts
+* @author     Harmony Reppert
+* @date       2/1/2019
+* @link       https://github.com/HarmonyR/PerishableProducts
+*/
+-->
+    <config>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <perishableproducts translate="title" module="perishableproducts">
+                                            <title>Perishable Products</title>
+                                        </perishableproducts>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </config>

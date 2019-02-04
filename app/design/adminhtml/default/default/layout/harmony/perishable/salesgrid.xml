@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!--
+/**
+* @package    Harmony\PerishableProducts
+* @author     Harmony Reppert
+* @date       2/1/2019
+* @link       https://github.com/HarmonyR/PerishableProducts
+*/
+-->
+<layout>
+    <!-- Add custom column to grid -->
+    <add_order_grid_column_handle>
+        <reference name="sales_order.grid">
+            <action method="addColumnAfter">
+                <columnId>contains_perishable_item</columnId>
+                <arguments module="sales" translate="header">
+                    <header>Contains Perishable Item</header>
+                    <index>contains_perishable_item</index>
+                    <type>select</type>
+                    <filter>Harmony_PerishableProducts_Block_Widget_Grid_Column_Perishable</filter>
+                    <renderer>Harmony_PerishableProducts_Block_Widget_Grid_Column_Renderer_Perishable</renderer>
+                    <width>50</width>
+                </arguments>
+                <after>status</after>
+            </action>
+        </reference>
+    </add_order_grid_column_handle>
+    <!-- Order grid action -->
+    <adminhtml_sales_order_grid>
+        <!-- Apply the layout handle defined above -->
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_grid>
+    <!-- Order grid view action -->
+    <adminhtml_sales_order_index>
+        <!-- Apply the layout handle defined above -->
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_index>
+</layout>

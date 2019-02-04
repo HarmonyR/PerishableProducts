@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @package    Harmony\PerishableProducts
+* @author     Harmony Reppert
+* @date       2/1/2019
+* @link       https://github.com/HarmonyR/PerishableProducts
+*/
+-->
+<config>
+    <modules>
+        <Harmony_PerishableProducts>
+            <version>1.0.0</version>
+        </Harmony_PerishableProducts>
+    </modules>
+    <global>
+        <blocks>
+            <perishableproducts>
+                <class>Harmony_PerishableProducts_Block</class>
+            </perishableproducts>
+        </blocks>
+        <helpers>
+            <perishableproducts>
+                <class>Harmony_PerishableProducts_Helper</class>
+            </perishableproducts>
+        </helpers>
+        <models>
+            <perishableproducts>
+                <class>Harmony_PerishableProducts_Model</class>
+            </perishableproducts>
+        </models>
+        <resources>
+            <!-- Name in core_resources and directory name under sql -->
+            <harmony_perishableproducts>
+                <setup>
+                    <module>Harmony_PerishableProducts</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </harmony_perishableproducts>
+            <harmony_perishableproducts_write>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </harmony_perishableproducts_write>
+            <harmony_perishableproducts_read>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </harmony_perishableproducts_read>
+        </resources>
+        <!-- Global events because we want to catch frontend and backend events -->
+        <events>
+            <!-- Called when order is successfully placed frontend/backend -->
+            <checkout_submit_all_after>
+                <observers>
+                    <perishable_processOrderItems>
+                        <type>singleton</type>
+                        <class>perishableproducts/observer</class>
+                        <method>processOrderItems</method>
+                    </perishable_processOrderItems>
+                </observers>
+            </checkout_submit_all_after>
+        </events>
+    </global>
+    <default>
+        <!-- Default values for system config settings -->
+        <perishableproducts> <!-- section name -->
+            <settings> <!-- group name -->
+                <threshold>14</threshold>
+                <enabledebug>0</enabledebug>
+            </settings>
+        </perishableproducts>
+    </default>
+    <adminhtml>
+        <layout>
+            <!-- Sales order grid layout update -->
+            <updates>
+                <perishable_salesgrid>
+                    <file>harmony/perishable/salesgrid.xml</file>
+                </perishable_salesgrid>
+            </updates>
+        </layout>
+        <!-- Admin only events -->
+        <events>
+            <!-- Add custom column to product grid -->
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <perishable_addPerishableProductsColumn>
+                        <type>singleton</type>
+                        <class>perishableproducts/observer</class>
+                        <method>addColumnsToProductGrid</method>
+                    </perishable_addPerishableProductsColumn>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
+            <!-- Add custom field to product collection -->
+            <eav_collection_abstract_load_before>
+                <observers>
+                    <perishable_addPerishableProductsCollection>
+                        <type>singleton</type>
+                        <class>perishableproducts/observer</class>
+                        <method>addFieldsToProductCollection</method>
+                    </perishable_addPerishableProductsCollection>
+                </observers>
+            </eav_collection_abstract_load_before>
+        </events>
+    </adminhtml>
+    <frontend>
+        <events>
+            <!-- Called after products are loaded on the cart page -->
+            <sales_quote_item_set_product>
+                <observers>
+                    <perishable_postCartMessage>
+                        <type>singleton</type>
+                        <class>perishableproducts/observer</class>
+                        <method>postCartMessage</method>
+                    </perishable_postCartMessage>
+                </observers>
+            </sales_quote_item_set_product>
+        </events>
+    </frontend>
+</config>

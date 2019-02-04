@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @package    Harmony\PerishableProducts
+* @author     Harmony Reppert
+* @date       2/1/2019
+* @link       https://github.com/HarmonyR/PerishableProducts
+*/
+-->
+<config>
+    <modules>
+        <Harmony_PerishableProducts>
+            <codePool>local</codePool>
+            <active>true</active>
+            <depends>
+                <Mage_Catalog />
+                <Mage_Sales />
+            </depends>
+        </Harmony_PerishableProducts>
+    </modules>
+</config>

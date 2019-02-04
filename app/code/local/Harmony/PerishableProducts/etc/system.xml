@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @package    Harmony\PerishableProducts
+* @author     Harmony Reppert
+* @date       2/1/2019
+* @link       https://github.com/HarmonyR/PerishableProducts
+*/
+-->
+<config>
+    <tabs>
+        <harmony translate="label">
+            <label>Harmony</label>
+            <sort_order>9999</sort_order>
+        </harmony>
+    </tabs>
+    <sections>
+        <perishableproducts translate="label" module="perishableproducts">
+            <label>Perishable Products</label>
+            <tab>harmony</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>16</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>            
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <threshold translate="label">
+                            <label>Threshold (days)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enter a value in days to identify when a product is considered perishable. All products with a shelf life greater than zero and less than or equal to this value are considered perishable.</comment>
+                            <backend_model>perishableproducts/threshold</backend_model>
+                        </threshold>
+                        <enabledebug translate="label">
+                            <label>Enable Debug Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable/disable debug mode. Messages logged to var/log/perishableproducts.log.</comment>
+                        </enabledebug>
+                    </fields>
+                </settings>
+            </groups>
+        </perishableproducts>
+    </sections>
+</config>
